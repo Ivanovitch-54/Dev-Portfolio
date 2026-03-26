@@ -1,50 +1,59 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 
 export default function AuroraBackground() {
-    return (
-        <div className="absolute inset-0 -z-20 overflow-hidden">
+  const shouldReduceMotion = useReducedMotion()
 
-            <motion.div
-                className="absolute w-[800px] h-[800px] rounded-full bg-purple-500/30 blur-[160px]"
-                animate={{
-                    x: [0, 200, -200, 0],
-                    y: [0, -150, 150, 0],
-                }}
-                transition={{
-                    duration: 25,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                }}
-            />
+  // These are data-driven so we can tune the hero atmosphere without rewriting JSX.
+  const blobs = [
+    {
+      className:
+        "left-[-10%] top-[-15%] h-[34rem] w-[34rem] bg-sky-400/16",
+      animate: {
+        x: [0, 140, -60, 0],
+        y: [0, -80, 120, 0],
+      },
+      duration: 24,
+    },
+    {
+      className:
+        "right-[-8%] top-[10%] h-[30rem] w-[30rem] bg-cyan-300/14",
+      animate: {
+        x: [0, -180, 120, 0],
+        y: [0, 140, -120, 0],
+      },
+      duration: 28,
+    },
+    {
+      className:
+        "bottom-[-18%] left-[18%] h-[28rem] w-[28rem] bg-emerald-300/12",
+      animate: {
+        x: [0, 120, -120, 0],
+        y: [0, -90, 80, 0],
+      },
+      duration: 30,
+    },
+  ]
 
-            <motion.div
-                className="absolute w-[700px] h-[700px] rounded-full bg-blue-500/30 blur-[160px]"
-                animate={{
-                    x: [0, -250, 250, 0],
-                    y: [0, 200, -200, 0],
-                }}
-                transition={{
-                    duration: 30,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                }}
-            />
-
-            <motion.div
-                className="absolute w-[600px] h-[600px] rounded-full bg-pink-500/30 blur-[160px]"
-                animate={{
-                    x: [0, 150, -150, 0],
-                    y: [0, -200, 200, 0],
-                }}
-                transition={{
-                    duration: 28,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                }}
-            />
-
-        </div>
-    )
+  return (
+    <div className="absolute inset-0 -z-20 overflow-hidden">
+      {blobs.map((blob) => (
+        <motion.div
+          key={blob.className}
+          className={`absolute rounded-full blur-[160px] ${blob.className}`}
+          animate={shouldReduceMotion ? undefined : blob.animate}
+          transition={
+            shouldReduceMotion
+              ? undefined
+              : {
+                  duration: blob.duration,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }
+          }
+        />
+      ))}
+    </div>
+  )
 }

@@ -1,43 +1,151 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --page-background:
+    radial-gradient(circle at top, rgba(56, 189, 248, 0.08), transparent 34%),
+    radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.06), transparent 24%),
+    linear-gradient(180deg, #020617 0%, #040b19 45%, #020617 100%);
 }
 
 body {
-  background: black;
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  background: var(--page-background);
+  color: #f8fafc;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior-x: none;
 }
 
-/* grid background */
+body::before,
+body::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
 
-.grid-background {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px,
-      transparent 1px),
-    linear-gradient(90deg,
-      rgba(255, 255, 255, 0.03) 1px,
-      transparent 1px);
+body::before {
+  opacity: 0.24;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%);
+}
 
-  background-size: 40px 40px;
+body::after {
+  background:
+    radial-gradient(circle at center, transparent 45%, rgba(2, 6, 23, 0.45) 100%);
+}
+
+::selection {
+  background: rgba(125, 211, 252, 0.24);
+  color: #f8fafc;
 }
 
 .glow {
   position: absolute;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.15), transparent 70%);
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.12), transparent 70%);
   filter: blur(100px);
 }
 
-/* Smooth Scroll Nav */ 
-
 html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
   scroll-behavior: smooth;
+  overscroll-behavior-x: none;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a[href^="#"] {
+  scroll-behavior: smooth;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid rgba(125, 211, 252, 0.9);
+  outline-offset: 3px;
+}
+
+.section-target-line {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  opacity: 0;
+  transform: scaleX(0.82);
+  transform-origin: center;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent 0%, rgba(125, 211, 252, 0.88) 50%, transparent 100%);
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s ease;
+}
+
+[data-nav-focused="true"] > .section-target-line {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+body[data-project-preview-open="true"] [data-navbar-shell="true"] {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-12px);
+}
+
+.skip-link {
+  transform: translateY(-160%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.hero-viewport {
+  min-height: calc(100svh - 6.4rem);
+  min-height: calc(100dvh - 6.4rem);
+}
+
+@media (max-width: 639px) {
+  body::before {
+    opacity: 0.18;
+    background-size: 56px 56px;
+  }
+
+  .glow {
+    width: 420px;
+    height: 420px;
+    filter: blur(84px);
+  }
+
+  .section-target-line {
+    left: 16px;
+    right: 16px;
+  }
+
+  .hero-viewport {
+    min-height: calc(100svh - 5.8rem);
+    min-height: calc(100dvh - 5.8rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

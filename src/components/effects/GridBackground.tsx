@@ -1,30 +1,39 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 
 export default function GridBackground() {
-    return (
-        <div className="absolute inset-0 -z-10 overflow-hidden">
+  const shouldReduceMotion = useReducedMotion()
 
-            <motion.div
-                className="absolute inset-0 opacity-[0.08]"
-                style={{
-                    backgroundImage: `
-            linear-gradient(to right, #ffffff 1px, transparent 1px),
-            linear-gradient(to bottom, #ffffff 1px, transparent 1px)
-          `,
-                    backgroundSize: "60px 60px",
-                }}
-                animate={{
-                    backgroundPosition: ["0px 0px", "60px 60px"],
-                }}
-                transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    ease: "linear",
-                }}
-            />
-
-        </div>
-    )
+  return (
+    <div className="absolute inset-0 -z-10 overflow-hidden">
+      <motion.div
+        className="absolute inset-0 opacity-[0.08]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(255,255,255,0.7) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.7) 1px, transparent 1px)",
+          backgroundSize: "72px 72px",
+          maskImage:
+            "linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
+        }}
+        animate={
+          shouldReduceMotion
+            ? undefined
+            : {
+                // Drifting the grid very slowly adds depth without competing with foreground content.
+                backgroundPosition: ["0px 0px", "72px 72px"],
+              }
+        }
+        transition={
+          shouldReduceMotion
+            ? undefined
+            : {
+                duration: 22,
+                repeat: Infinity,
+                ease: "linear",
+              }
+        }
+      />
+    </div>
+  )
 }
