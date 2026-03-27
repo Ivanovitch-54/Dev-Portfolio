@@ -1,52 +1,48 @@
-"use client";
-
-import { motion } from "framer-motion";
-import ContactButton from "@/components/layout/ContactButton";
+import ContactButton from "@/components/layout/ContactButton"
+import Reveal from "@/components/ui/Reveal"
+import Section from "@/components/ui/Section"
+import SectionHeading from "@/components/ui/SectionHeading"
+import { openToTopics, socialLinks } from "@/data/site"
 
 export default function Contact() {
-    return (
-        <section
-            id="contact"
-            className="py-32 px-6 max-w-5xl mx-auto text-center"
-        >
-            <motion.h2
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-                className="text-4xl md:text-5xl font-bold mb-6 bg-linear-to-r from-blue-500 text-transparent bg-clip-text"
-            >
-                Let&apos;s build something together
-            </motion.h2>
+  return (
+    <Section id="contact" containerClassName="max-w-5xl">
+      <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.04] px-4 py-8 text-center shadow-[0_20px_80px_rgba(2,8,23,0.24)] backdrop-blur-xl sm:px-6 sm:py-10 md:rounded-[2rem] md:px-10 md:py-14">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-[18%] top-0 h-24 rounded-full bg-sky-300/10 blur-3xl"
+        />
 
-            <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                className="text-white/60 max-w-xl mx-auto mb-12"
-            >
-                I&apos;m always open to discussing new projects, creative ideas,
-                or opportunities to be part of your team.
-            </motion.p>
+        <SectionHeading
+          eyebrow="Contact"
+          title="Let&apos;s build something thoughtful together."
+          description="I&apos;m open to fullstack roles, freelance collaborations, and product teams that care about quality in both UX and engineering."
+          align="center"
+        />
 
-            <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-                className="flex flex-wrap justify-center gap-4"
-            >
-                <ContactButton href="mailto:your@email.com">
-                    Email Me
-                </ContactButton>
+        <Reveal delay={0.1}>
+          <div className="mb-8 flex flex-wrap justify-center gap-2">
+            {openToTopics.map((topic) => (
+              <span
+                key={topic}
+                className="rounded-full border border-white/10 bg-slate-950/60 px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-white/56 sm:text-xs sm:tracking-[0.18em]"
+              >
+                {topic}
+              </span>
+            ))}
+          </div>
+        </Reveal>
 
-                <ContactButton href="https://github.com/yourusername">
-                    GitHub
-                </ContactButton>
-
-                <ContactButton href="https://linkedin.com/in/yourusername">
-                    LinkedIn
-                </ContactButton>
-            </motion.div>
-        </section>
-    );
+        <Reveal delay={0.15}>
+          <div className="grid gap-3 sm:flex sm:flex-wrap sm:justify-center sm:gap-4">
+            {socialLinks.map((link) => (
+              <ContactButton key={link.label} href={link.href}>
+                {link.label}
+              </ContactButton>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+    </Section>
+  )
 }

@@ -1,31 +1,17 @@
-"use client"
-
-import { motion } from "framer-motion"
-
-const tech = [
-    "React",
-    "Next.js",
-    "TypeScript",
-    "Node.js",
-    "Tailwind"
-]
+import { heroTechStack } from "@/data/site"
 
 export default function HeroTechStack() {
-    return (
-        <div className="flex gap-4 mt-12 flex-wrap justify-center">
-
-            {tech.map((item, index) => (
-                <motion.div
-                    key={item}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.2 }}
-                    className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 backdrop-blur"
-                >
-                    {item}
-                </motion.div>
-            ))}
-
+  return (
+    <div className="mt-10 flex flex-wrap justify-start gap-2.5 sm:gap-3">
+      {heroTechStack.map((item) => (
+        <div
+          key={item}
+          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/70 backdrop-blur-md sm:px-3.5 sm:py-2 sm:text-sm"
+        >
+          <span className="h-1.5 w-1.5 rounded-full bg-sky-300/80" />
+          {item}
         </div>
-    )
+      ))}
+    </div>
+  )
 }
