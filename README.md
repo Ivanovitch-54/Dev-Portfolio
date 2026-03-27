@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ivan Noblecourt | Fullstack Developer Portfolio
 
-## Getting Started
+Portfolio built to present a fullstack profile with strong frontend execution, product-minded UI decisions, and clean application structure.
 
-First, run the development server:
+Live site: [ivanovitch-54.github.io/Dev-Portfolio](https://ivanovitch-54.github.io/Dev-Portfolio/)
+
+## Recruiter Snapshot
+
+This project is meant to answer a few hiring questions quickly:
+
+- Can he build polished, responsive interfaces that feel production-ready?
+- Does he think beyond visuals and structure work like a fullstack developer?
+- Does the codebase show reusable patterns, maintainability, and attention to detail?
+
+The site is intentionally positioned around:
+
+- fullstack product development
+- modern React and Next.js delivery
+- motion used with restraint
+- mobile-first responsive quality
+- backend-aware frontend architecture
+
+## What This Portfolio Shows
+
+- A strong landing experience with clear hierarchy, motion, and recruiter-friendly scanning
+- Project cards that highlight product thinking, UX priorities, and implementation signals
+- Reusable section, animation, and navigation primitives instead of one-off page code
+- Responsive behavior tuned for mobile, safe areas, and sticky navigation
+- GitHub Pages deployment through a static Next.js export and GitHub Actions
+
+## Featured Skills
+
+- Frontend: Next.js, React, TypeScript, Tailwind CSS
+- UX and motion: Framer Motion, responsive design, micro-interactions, visual polish
+- Architecture: App Router, component design, scalable code, API structure
+- Backend and tooling: Node.js, PHP, SQL, REST APIs, Git
+
+## Projects Included
+
+### AI Dashboard
+
+Dark product UI concept focused on AI-assisted workflows, dense content hierarchy, and dashboard readability.
+
+### Todo App
+
+Compact task management interface centered on quick entry, clear completion states, and focused interaction design.
+
+### Weather App
+
+Responsive utility app built around city search, geolocation, and readable forecast browsing across screen sizes.
+
+## Tech Stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- Framer Motion
+- lucide-react
+
+## Run Locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Validation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+```
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+This repository is configured for GitHub Pages using:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `output: "export"` in Next.js
+- unoptimized static images for export compatibility
+- a GitHub Actions workflow that builds and deploys the `out/` directory
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contact
 
-## Deploy on Vercel
+- GitHub: [Ivanovitch-54](https://github.com/Ivanovitch-54)
+- Email: [ivan.noblecourt@gmail.com](mailto:ivan.noblecourt@gmail.com)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Recruiter Read
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+For a recruiter, this README is now much stronger than the default template because it communicates:
+
+- who the portfolio owner is
+- what kind of role he is targeting
+- what technical signals the project demonstrates
+- where to view the live work immediately
+
+The main thing still missing for a truly excellent recruiter-facing README would be 1 to 2 concrete outcome-style lines such as team impact, shipped features, internship/professional context, or measurable results from real projects. If you want, I can add that next and make it feel even more credible.
