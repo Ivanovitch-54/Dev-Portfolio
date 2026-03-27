@@ -1,5 +1,6 @@
 "use client"
 
+import { getAssetPath } from "@/lib/asset-path"
 import type { Project } from "@/types/portfolio"
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import { X } from "lucide-react"
@@ -97,7 +98,7 @@ export default function ProjectPreviewDialog({
             {/* The screenshot is shown with contain so recruiters can inspect the real UI without crop loss. */}
             <div className="relative flex-1 overflow-auto bg-[radial-gradient(circle_at_top,rgba(125,211,252,0.08),transparent_32%),linear-gradient(180deg,#070b16_0%,#0b1120_100%)] p-3 sm:p-5">
               <Image
-                src={project.image}
+                src={getAssetPath(project.image)}
                 alt={project.imageAlt}
                 width={1200}
                 height={720}

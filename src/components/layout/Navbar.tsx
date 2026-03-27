@@ -3,7 +3,7 @@
 import ScrollProgress from "@/components/layout/ScrollProgress"
 import { navigationLinks } from "@/data/site"
 import { useActiveSection } from "@/hooks/useActiveSection"
-import { getSectionScrollTop } from "@/lib/section-navigation"
+import { scrollToSectionById } from "@/lib/section-navigation"
 import { cn } from "@/lib/utils"
 import {
   AnimatePresence,
@@ -12,13 +12,12 @@ import {
 } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import Link from "next/link"
-import { MouseEvent, useEffect, useMemo, useRef, useState } from "react"
+import { MouseEvent, useEffect, useMemo, useState } from "react"
 
 export default function Navbar() {
   const active = useActiveSection()
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useReducedMotion() ?? false
   const [menuOpen, setMenuOpen] = useState(false)
-  const focusTimeoutRef = useRef<number | null>(null)
 
   const currentSection = active
   const currentLabel = useMemo(
@@ -45,43 +44,10 @@ export default function Navbar() {
   const navigateToSection = (id: (typeof navigationLinks)[number]["id"]) => (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault()
 
-    const section = document.getElementById(id)
-    if (!section) {
-      return
-    }
-
-    // The navbar and the scroll-spy hook use the same targeting helper so the
-    // clicked link, the final scroll position, and the active state stay aligned.
-    const top = getSectionScrollTop(section)
-
-    if (focusTimeoutRef.current) {
-      window.clearTimeout(focusTimeoutRef.current)
-    }
-
-    document.querySelectorAll("[data-nav-focused='true']").forEach((element) => {
-      element.removeAttribute("data-nav-focused")
+    scrollToSectionById(id, {
+      shouldReduceMotion,
+      onBeforeScroll: () => setMenuOpen(false),
     })
-
-    // Temporary feedback on the destination section makes in-page navigation
-    // feel intentional, especially on mobile where the travel distance is large.
-    section.setAttribute("data-nav-focused", "true")
-    section.focus({ preventScroll: true })
-    window.history.pushState(null, "", `#${id}`)
-
-    setMenuOpen(false)
-
-    window.scrollTo({
-      top,
-      behavior: shouldReduceMotion ? "auto" : "smooth",
-    })
-
-    if (focusTimeoutRef.current) {
-      window.clearTimeout(focusTimeoutRef.current)
-    }
-
-    focusTimeoutRef.current = window.setTimeout(() => {
-      section.removeAttribute("data-nav-focused")
-    }, shouldReduceMotion ? 240 : 1200)
   }
 
   return (

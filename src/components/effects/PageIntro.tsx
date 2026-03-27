@@ -1,18 +1,29 @@
 "use client"
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useSyncExternalStore } from "react"
+
+function subscribeToIntroState() {
+  return () => {}
+}
+
+function getClientIntroState() {
+  return window.sessionStorage.getItem("portfolio_intro_seen") === "true"
+}
+
+function getServerIntroState() {
+  return false
+}
 
 export default function PageIntro() {
   const shouldReduceMotion = useReducedMotion()
-  const [complete, setComplete] = useState(() => {
-    if (typeof window === "undefined") {
-      return false
-    }
-
-    // The intro is purely atmospheric, so we only show it once per tab session.
-    return window.sessionStorage.getItem("portfolio_intro_seen") === "true"
-  })
+  const hasSeenIntro = useSyncExternalStore(
+    subscribeToIntroState,
+    getClientIntroState,
+    getServerIntroState
+  )
+  const [dismissed, setDismissed] = useState(false)
+  const complete = hasSeenIntro || dismissed
 
   useEffect(() => {
     if (complete) {
@@ -22,7 +33,7 @@ export default function PageIntro() {
     // Keep the intro short enough to feel premium, not blocking.
     const timeout = window.setTimeout(() => {
       window.sessionStorage.setItem("portfolio_intro_seen", "true")
-      setComplete(true)
+      setDismissed(true)
     }, shouldReduceMotion ? 180 : 850)
 
     return () => window.clearTimeout(timeout)

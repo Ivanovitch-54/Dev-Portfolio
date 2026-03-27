@@ -32,7 +32,7 @@ export default function SectionHeading({
       ) : null}
 
       <Reveal delay={0.05}>
-        <h2 className="text-balance bg-gradient-to-r from-white via-slate-100 to-sky-100/85 bg-clip-text text-3xl font-semibold tracking-tight text-transparent sm:text-4xl md:text-5xl">
+        <h2 className="pb-[0.12em] text-balance bg-gradient-to-r from-white via-slate-100 to-sky-100/85 bg-clip-text text-3xl font-semibold leading-[1.08] tracking-tight text-transparent sm:text-4xl md:text-5xl">
           {title}
         </h2>
       </Reveal>

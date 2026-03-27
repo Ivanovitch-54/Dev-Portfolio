@@ -1,5 +1,6 @@
 const SECTION_CONTENT_SELECTOR = "[data-section-content='true']"
 const NAVBAR_SELECTOR = "[data-navbar-root='true']"
+let focusTimeout: number | null = null
 
 function getViewportSafeArea() {
   const isDesktop = window.innerWidth >= 768
@@ -60,4 +61,52 @@ export function getSectionScrollTop(section: HTMLElement) {
   return section.id === "hero"
     ? 0
     : Math.max(0, targetAbsoluteTop - navHeight - topOffset - centeredOffset)
+}
+
+export function clearSectionFocusFeedback() {
+  if (focusTimeout) {
+    window.clearTimeout(focusTimeout)
+    focusTimeout = null
+  }
+
+  document.querySelectorAll("[data-nav-focused='true']").forEach((element) => {
+    element.removeAttribute("data-nav-focused")
+  })
+}
+
+export function scrollToSectionById(
+  id: string,
+  options: {
+    shouldReduceMotion?: boolean
+    onBeforeScroll?: () => void
+  } = {}
+) {
+  const section = document.getElementById(id)
+
+  if (!(section instanceof HTMLElement)) {
+    return false
+  }
+
+  const shouldReduceMotion = options.shouldReduceMotion ?? false
+  const top = getSectionScrollTop(section)
+
+  clearSectionFocusFeedback()
+
+  section.setAttribute("data-nav-focused", "true")
+  section.focus({ preventScroll: true })
+  window.history.pushState(null, "", `#${id}`)
+
+  options.onBeforeScroll?.()
+
+  window.scrollTo({
+    top,
+    behavior: shouldReduceMotion ? "auto" : "smooth",
+  })
+
+  focusTimeout = window.setTimeout(() => {
+    section.removeAttribute("data-nav-focused")
+    focusTimeout = null
+  }, shouldReduceMotion ? 240 : 1200)
+
+  return true
 }

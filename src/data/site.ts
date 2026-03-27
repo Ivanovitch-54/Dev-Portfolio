@@ -20,10 +20,11 @@ export const heroTechStack = [
   "Next.js",
   "TypeScript",
   "Node.js",
+  "PHP",
+  "SQL",
   "API Design",
   "Tailwind CSS",
   "Framer Motion",
-  "System Design",
 ]
 
 export const heroSignals: HeroSignal[] = [

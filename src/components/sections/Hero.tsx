@@ -5,7 +5,7 @@ import HeroSignals from "@/components/hero/HeroSignals"
 import HeroTechStack from "@/components/hero/HeroTechStack"
 import HeroTyping from "@/components/hero/HeroTyping"
 import Reveal from "@/components/ui/Reveal"
-import Link from "next/link"
+import SectionLink from "@/components/ui/SectionLink"
 import AuroraBackground from "../effects/AuroraBackground"
 import GridBackground from "../effects/GridBackground"
 import HeroFloatingIcons from "../hero/HeroFloatingIcons"
@@ -86,15 +86,15 @@ export default function Hero() {
           </Reveal>
 
           <Reveal delay={0.42}>
-            <Link
-              href="#projects"
-              className="mt-9 inline-flex items-center gap-3 self-start rounded-full border border-white/10 bg-slate-950/50 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.16em] text-white/55 transition hover:border-white/20 hover:text-white sm:text-xs sm:tracking-[0.24em]"
+            <SectionLink
+              sectionId="projects"
+              className="mt-9 inline-flex min-h-11 items-center gap-3 self-start rounded-full border border-white/10 bg-slate-950/50 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.16em] text-white/55 transition hover:border-white/20 hover:text-white sm:text-xs sm:tracking-[0.24em]"
             >
               Explore selected work
               <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-white/10 text-[10px]">
                 v
               </span>
-            </Link>
+            </SectionLink>
           </Reveal>
         </div>
 

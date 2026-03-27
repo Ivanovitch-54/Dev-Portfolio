@@ -22,7 +22,7 @@ export const skillGroups: SkillGroup[] = [
   {
     title: "Backend and Tooling",
     description:
-      "Node.js foundations, REST APIs, and developer workflows that support reliable shipping beyond the UI layer.",
-    items: ["Node.js", "REST APIs", "Git", "Developer Experience"],
+      "Backend foundations, SQL data work, REST APIs, and developer workflows that support reliable shipping beyond the UI layer.",
+    items: ["Node.js", "PHP", "SQL", "REST APIs", "Git", "Developer Experience"],
   },
 ]

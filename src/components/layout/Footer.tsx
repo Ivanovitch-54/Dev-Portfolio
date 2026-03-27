@@ -1,4 +1,4 @@
-import Link from "next/link"
+import SectionLink from "@/components/ui/SectionLink"
 import { navigationLinks, socialLinks } from "@/data/site"
 
 export default function Footer() {
@@ -37,13 +37,13 @@ export default function Footer() {
                 </p>
                 <div className="mt-4 grid gap-3">
                   {navigationLinks.map((link) => (
-                    <Link
+                    <SectionLink
                       key={link.id}
-                      href={`#${link.id}`}
-                      className="text-sm text-white/62 transition hover:text-white"
+                      sectionId={link.id}
+                      className="inline-flex min-h-11 items-center rounded-2xl border border-white/8 bg-white/[0.03] px-4 text-sm text-white/62 transition hover:border-white/15 hover:text-white sm:min-h-0 sm:rounded-none sm:border-none sm:bg-transparent sm:px-0"
                     >
                       {link.label}
-                    </Link>
+                    </SectionLink>
                   ))}
                 </div>
               </div>
@@ -59,7 +59,7 @@ export default function Footer() {
                       href={link.href}
                       target={link.href.startsWith("http") ? "_blank" : undefined}
                       rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="text-sm text-white/62 transition hover:text-white"
+                      className="inline-flex min-h-11 items-center rounded-2xl border border-white/8 bg-white/[0.03] px-4 text-sm text-white/62 transition hover:border-white/15 hover:text-white sm:min-h-0 sm:rounded-none sm:border-none sm:bg-transparent sm:px-0"
                     >
                       {link.label}
                     </a>

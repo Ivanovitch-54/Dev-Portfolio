@@ -2,6 +2,7 @@
 
 import ProjectPreviewDialog from "@/components/projects/ProjectPreviewDialog"
 import InteractiveCard from "@/components/ui/InteractiveCard"
+import { getAssetPath } from "@/lib/asset-path"
 import { cn } from "@/lib/utils"
 import type { Project } from "@/types/portfolio"
 import { ArrowRight, ArrowUpRight, Expand, ScanSearch } from "lucide-react"
@@ -48,7 +49,7 @@ export default function ProjectCard({
           >
             <div className={cn("pointer-events-none absolute inset-0 bg-gradient-to-br", accent.glow)} />
             <Image
-              src={project.image}
+              src={getAssetPath(project.image)}
               alt={project.imageAlt}
               width={1200}
               height={720}
